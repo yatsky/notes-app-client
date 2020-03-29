@@ -6,7 +6,8 @@ import './App.css';
 function App(props) {
   return (
     <div className="App container">
-      <Navbar className="App container">
+      {/*  fluid makes sure Navbar fits its container's width  */}
+      <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Scratch</Link>
