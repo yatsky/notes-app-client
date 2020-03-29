@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
+import Login from "./containers/Login";
 
 export default function Routes() {
     return (
@@ -10,6 +11,7 @@ export default function Routes() {
         {/* exact makes sure that this component matches "/" only. */}
             <Route path="/" exact component={Home} />
             {/* catch all unmatched routes */}
+            <Route path="/login" exact component={Login} />
             <Route component={NotFound} />
         </Switch>
     );
