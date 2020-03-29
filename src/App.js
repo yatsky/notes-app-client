@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import './App.css';
+import Routes from "./Routes";
+
 
 function App(props) {
   return (
@@ -14,6 +16,7 @@ function App(props) {
           </Navbar.Brand>
         </Navbar.Header>
       </Navbar>
+      <Routes />
     </div>
   );
 }
