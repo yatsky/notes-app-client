@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
@@ -7,6 +7,8 @@ import Routes from "./Routes";
 
 
 function App(props) {
+  // initialize states and set them to false
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
   return (
     <div className="App container">
       {/*  fluid makes sure Navbar fits its container's width  */}
@@ -28,7 +30,7 @@ function App(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes />
+      <Routes appProps={{ isAuthenticated, userHasAuthenticated }}/>
     </div>
   );
 }
