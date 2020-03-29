@@ -1,0 +1,1 @@
+Dealing with all our React components that are not dealing directly with our API or responding to routes.

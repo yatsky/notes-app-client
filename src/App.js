@@ -9,6 +9,11 @@ import Routes from "./Routes";
 function App(props) {
   // initialize states and set them to false
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  function handleLogout() {
+    userHasAuthenticated(false);
+  }
+
   return (
     <div className="App container">
       {/*  fluid makes sure Navbar fits its container's width  */}
@@ -21,12 +26,17 @@ function App(props) {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
+            {isAuthenticated
+            ? <NavItem onClick={handleLogout}>Logout</NavItem>
+          : <>
             <LinkContainer to="/signup">
               <NavItem>Sign up</NavItem>
             </LinkContainer>
             <LinkContainer to="/login">
               <NavItem>Log in</NavItem>
             </LinkContainer>
+            </>
+          }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
