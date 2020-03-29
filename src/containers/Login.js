@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
+import { Auth } from "aws-amplify";
 
 export default function Login(props){
     // we use hooks to store/update variables
@@ -11,8 +12,15 @@ export default function Login(props){
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
+
+        try {
+            await Auth.signIn(email, password);
+            alert("Logged in");
+        }catch(err){
+            alert(err.message);
+        }
     }
 
     return (
