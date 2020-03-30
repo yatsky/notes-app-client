@@ -9,6 +9,8 @@ import {
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
 import "./Signup.css";
+import { Auth } from "aws-amplify";
+
 
 export default function Signup(props) {
     const [fields, handleFieldChange] = useFormFields({
@@ -37,13 +39,45 @@ export default function Signup(props) {
         e.preventDefault();
 
         setIsLoading(true);
-        setNewUser("test");
-        setIsLoading(false);
+        try {
+            const newUser = await Auth.signUp({
+                username: fields.email,
+                password: fields.password
+            });
+
+            setIsLoading(false);
+            // we change the state of newUser
+            // and React will render the confirmationForm accordingly.
+            setNewUser(newUser);
+        }catch (err){
+            if (err.code === "UsernameExistsException"){
+                alert("Sorry, User already exists. A new confirmation email has been sent.");
+                const newUser = await Auth.resendSignUp(
+                    fields.email
+                );
+                setIsLoading(false);
+                setNewUser(newUser);
+                return;
+            }
+            alert(err.message);
+            setIsLoading(false);
+        }
     }
 
     async function handleConfirmationSubmit(e){
         e.preventDefault();
         setIsLoading(true);
+
+        try{
+            await Auth.confirmSignUp(fields.email, fields.confirmationCode);
+            await Auth.signIn(fields.email, fields.password);
+
+            props.userHasAuthenticated(true);
+            props.history.push("/");
+        } catch (err){
+            alert(err.message);
+            setIsLoading(false);
+        }
     }
 
     function renderConfirmationForm() {
