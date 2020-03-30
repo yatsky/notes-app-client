@@ -1,4 +1,6 @@
 export default {
+
+  MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
     REGION: "ap-southeast-2",
     BUCKET: "yaoni-notes-app-uploads-tutorial"
