@@ -26,7 +26,8 @@ export default function Login(props){
         try {
             await Auth.signIn(fields.email, fields.password);
             props.userHasAuthenticated(true);
-            props.history.push("/");
+            // remove this because UnauthenticatedRoute handles redirection
+            // props.history.push("/");
         }catch(err){
             alert(err.message);
             setIsLoading(false);
