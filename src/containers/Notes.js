@@ -4,6 +4,7 @@ import config from "../config";
 import LoaderButton from "../components/LoaderButton";
 import {FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import "./Notes.css";
+import { s3Upload } from "../libs/awsLib";
 
 export default function Notes(props){
 
@@ -50,6 +51,13 @@ export default function Notes(props){
         file.current = e.target.files[0];
     }
 
+    function saveNote(note){
+        return API.put("notes", `/notes/${props.match.params.id}`,
+        {
+            body:note
+        });
+    }
+
     async function handleSubmit(e){
         let attachment;
         e.preventDefault();
@@ -62,6 +70,24 @@ export default function Notes(props){
             return;
         }
         setIsLoading(true);
+        try{
+            if(file.current){
+                attachment = await s3Upload(file.current);
+            }
+            await saveNote({
+                content,
+                // we save the new attachment if there's one
+                // else it's just the old note.attachment
+                attachment: attachment || note.attachment
+            });
+            // we redirect user to the home page so no need to
+            // setIsLoading(true)
+            props.history.push("/");
+        }catch(err){
+            alert(err);
+            setIsLoading(false);
+        }
+
     }
 
     async function handleDelete(e){
