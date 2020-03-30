@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import {CardElement, injectStripe} from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
-import {userFormFields} from "../libs/hooksLib";
+import {useFormFields} from "../libs/hooksLib";
 import "./BillingForm.css";
 
 
 function BillingForm({isLoading, onSubmit, ...props}){
 
-    const [fields, handleFieldChange] = userFormFields({
+    const [fields, handleFieldChange] = useFormFields({
         name: "",
         storage:""
     });
@@ -37,7 +37,7 @@ function BillingForm({isLoading, onSubmit, ...props}){
     }
     return (
         <form className="BillingForm" onSubmit={handleSubmitClick}>
-            <FormGroup bsSize="large" controleId="storage">
+            <FormGroup bsSize="large" controlId="storage">
                 <ControlLabel>Storage</ControlLabel>
                 <FormControl
                 min="0"
