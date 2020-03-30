@@ -14,5 +14,8 @@ export default {
     USER_POOL_ID: "ap-southeast-2_fEIAnjEtt",
     APP_CLIENT_ID: "2smkgslrjtd838sm8o5j1b6rfg",
     IDENTITY_POOL_ID: "ap-southeast-2:f244ffff-0260-4174-ac70-102209f7025a"
-  }
+  },
+
+  STRIPE_KEY: "pk_test_5rFGh83VPkWQWaHgt9bqlmRT009ek1NX2K"
+
 };
