@@ -3,6 +3,7 @@ import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import "./Home.css";
 import { API } from "aws-amplify";
+import config from "../config";
 
 export default function Home(props) {
     const [notes, setNotes] = useState([]);
@@ -57,7 +58,7 @@ export default function Home(props) {
         return (
         <div className="Home">
             <div className="lander">
-                <h1>Scratch</h1>
+                <h1>{ config.PRODUCT_NAME }</h1>
                 <p>A modernised note taking app</p>
             </div>
         </div>

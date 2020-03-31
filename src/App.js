@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import './App.css';
 import Routes from "./Routes";
 import { Auth } from "aws-amplify";
+import config from "./config";
 
 
 function App(props) {
@@ -43,7 +44,7 @@ function App(props) {
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Scratch</Link>
+            <Link to="/">{ config.PRODUCT_NAME }</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
